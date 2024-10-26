@@ -37,4 +37,22 @@ disableLogger: true,
 // https://docs.sentry.io/product/crons/
 // https://vercel.com/docs/cron-jobs
 automaticVercelMonitors: true,
+
+try {
+    export default withSentryConfig(nextConfig, {
+        silent: true,
+        org: "javascript-mastery",
+        project: "javascript-nextjs",
+    }, {
+        widenClientFileUpload: true,
+        transpileClientSDK: true,
+        hideSourceMaps: true,
+        disableLogger: true,
+        automaticVercelMonitors: true,
+    });
+} catch (error) {
+    console.error('Error configuring Sentry:', error);
+    throw new Error('Failed to configure Sentry'); // Ensure this is an instance of Error
+}
+
 });
